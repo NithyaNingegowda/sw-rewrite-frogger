@@ -13,8 +13,8 @@ In order to run this project locally, you need to use a localhost since the Serv
 
 /*Steps for express.js */
 
-Using git bash:
 
-1. npm install 
-2. node server --> It should output "sever on 8000"
+1. install node on you system
+1. Navigate into the game folder where package.json file is present and install project dependencies --> npm install 
+2. Run the project --> node server --> It should output "sever on 8000"
 3. start http://localhost:8000/ : your index.html will be called
