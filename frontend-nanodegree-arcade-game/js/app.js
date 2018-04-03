@@ -40,6 +40,7 @@ const Enemy = class {
     checkCollision() {
         if((this.y == player.y) && (((player.x) < this.x + 80))&&(player.x + player.width > this.x)){
         //bring player to original position
+        player.decreaseLife();
         player.resetPlayer();
         }
     }
@@ -54,6 +55,7 @@ const Player = class{
         this.resetPlayer();
         this.width = 101;
         this.score = 0;
+        this.life = 3;
     }
 
     //handles the user input and moves the player on the screen
@@ -72,7 +74,6 @@ const Player = class{
             player.x += 101;
             break;
         default:
-            console.log(obj);
         }
     }
 
@@ -96,6 +97,13 @@ const Player = class{
         if(this.x > 402){
             this.x = 402;
         }
+        //no more lives
+        //game over
+        if(this.life === 0){
+            console.log("game over");
+            //implement a game over
+            ctx.clearRect(0,0,505,606);
+        }
     }
 
     // Draw the player on the screen, required method for game
@@ -103,6 +111,7 @@ const Player = class{
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
         ctx.font = '24PT Impact';
         ctx.fillText(`Score: ${this.score}`, 10, 90);
+        ctx.fillText(`Lives: ${this.life}`, 10, 580);
     }
 
     //Bring player to original position
@@ -114,6 +123,16 @@ const Player = class{
     //Raise the score
     raiseScore() {
         this.score++;
+    }
+
+    //decrease life
+    decreaseLife(){
+        this.life--;
+    }
+
+    //increase life
+    increaseLife(){
+        this.life++;
     }
 };
 

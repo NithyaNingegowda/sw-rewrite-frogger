@@ -56,3 +56,12 @@ body {
     margin: auto;
 
 }
+
+.sw-button {
+    background-color: blue;
+    color: #FFF;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 5px 10px;
+}
