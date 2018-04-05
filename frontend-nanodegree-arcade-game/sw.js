@@ -31,10 +31,11 @@ self.addEventListener('activate', event => {
   );
 });
 
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', function(event) {
+  console.log(event.request);
   event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
-      return cachedResponse || fetch(event.request);
+    caches.match(event.request).then(function(response) {
+      return response || fetch(event.request);
     })
   );
 });
