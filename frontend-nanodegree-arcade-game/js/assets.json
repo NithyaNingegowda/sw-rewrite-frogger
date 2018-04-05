@@ -1,0 +1,14 @@
+{
+    "cache": [
+        "index.html",
+        "css/style.css",
+        "js/app.js",
+        "js/engine.js",
+        "js/resources.js",
+        "images/water-block.png",
+        "images/stone-block.png",
+        "images/grass-block.png",
+        "images/enemy-bug.png",
+        "images/char-boy.png"        
+    ]
+}
