@@ -117,6 +117,30 @@ const Player = class{
     }
 };
 
+ const Life = class{
+     constructor() {
+        this.sprite = 'images/Heart.png';
+        this.x = 303; this.y = randomYPosition();
+        
+     }
+     render (){
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
+     }
+     update(){
+         this.collectLife();
+
+     }
+     collectLife(){
+         console.log('error is here');
+         if ((this.y == player.y) && (((player.x) < this.x + 80)) && (player.x + player.width >this.x )){
+             this.x = -1000;
+             this.y = -1000;
+
+         }
+         
+     } 
+ };
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -130,6 +154,7 @@ for(let i = 0; i < numEnemies; i++){
 }
 // Place the player object in a variable called player
 const player = new Player;
+const life = new Life;
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
