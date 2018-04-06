@@ -19,7 +19,7 @@ self.addEventListener('install', event => {
         'images/char-boy.png'
       ]);
     })
-  );//
+  );
 });
 
 self.addEventListener('activate', event => {
