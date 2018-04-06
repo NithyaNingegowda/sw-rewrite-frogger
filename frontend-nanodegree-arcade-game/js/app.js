@@ -192,3 +192,65 @@ function randomYPosition(){
     const position = getRandom(positions, 1);
     return position;
 }
+
+/*This function registers the service worker
+*/
+function registerServiceWorker() {
+    navigator.serviceWorker.register('sw.js').then(reg => {
+        console.log('SW registered');
+
+        //refers to the SW that controls this page
+        if(!navigator.serviceWorker.controller) {
+            //page didn't load using a SW
+            //loaded from the network
+            return;
+        }
+
+        if(reg.waiting) {
+            //there's an update ready!
+            notifySWUpdates(reg.waiting);      
+        }
+
+        if(reg.installing) {
+            //there's an update in progress
+            trackSWStates(reg.installing);
+        }
+
+        reg.addEventListener('updatefound', function() {
+            trackSWStates(reg.installing);
+        });
+
+        var reloading;
+        navigator.serviceWorker.addEventListener('controllerchange', function() {
+            if(reloading) return;
+            window.location.reload();
+            reloading = true;
+        });
+
+    }).catch(err => {
+        console.log('SW failed: ', err);
+    });
+}
+
+function notifySWUpdates(reg) {
+    console.log('There is a new Service Worker available');
+    //create button
+    let SW_Button = document.createElement('button');
+    SW_Button.classList.add("sw-button");
+    SW_Button.innerHTML = 'Update Available';
+    //append button
+    let doc_body = document.getElementsByTagName('body')[0];
+    doc_body.appendChild(SW_Button);
+    //onclick, post message
+    SW_Button.addEventListener('click', () => {
+        reg.postMessage({activate: 'true'});
+    });
+}
+
+function trackSWStates(reg) {
+    reg.addEventListener('statechange', function() {
+        if(this.state == 'installed') {
+            notifySWUpdates(reg);
+        }
+    });
+}   
