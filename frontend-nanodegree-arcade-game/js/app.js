@@ -105,10 +105,37 @@ const Player = class{
         //no more lives
         //game over
         if(this.life === 0){
-            console.log("game over");
             //implement a game over
+            // Get the <span> element for final score
+            var scores = document.getElementsByClassName("final-score");
+            for(let i = 0; i < scores.length ;i++){
+                scores[i].innerHTML = player.score;
+            }
+
+            // Get the modal
+            var modal = document.getElementById('myModal');
+            // Display modal
+            modal.style.display = "block";
+
             this.score = 0;
             this.life = 3;
+
+            // Get the <span> element that closes the modal
+            var spanClose = document.getElementsByClassName("close")[0];
+
+            // When the user clicks on <span> (x), close the modal
+            spanClose.onclick = function() {
+                modal.style.display = "none";
+                location.reload();
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                    location.reload();
+                }
+            }
 
         }
     }
@@ -129,7 +156,7 @@ const Player = class{
 
     //Raise the score
     raiseScore() {
-        this.score++;
+        this.score += 100;
     }
 
     //decrease life
@@ -149,11 +176,13 @@ const Gem = class{
         this.sprite = 'images/Gem-Blue.png';
         this.x = randomPosition(xPositions);
         this.y = randomPosition(yPositions);
+        this.width = 101;
     }
 
     update(){
         this.collectGem();
         this.checkObstacles();
+        this.checkLifePosition();
     }
 
     // Draw the Gem on the screen
@@ -169,18 +198,27 @@ const Gem = class{
             this.y = -1000;
 
             //increase score by 20 points
-            player.score += 5;
+            player.score += 20;
         }
     }
 
     //make sure the gem doesn't fall on the same position as the obstacle
     checkObstacles(){
         for(const obstacle of allObstacles){
-            if(((this.y == obstacle.y) && ((obstacle.x) < this.x + 80)) && (obstacle.x + obstacle.width > this.x)){
-            //
-            console.log("obstruct");
-
+            if(this.x == obstacle.x && this.y == obstacle.y){
+            //If gem lies in the same position as rock, move gem
+            this.x = randomPosition(xPositions);
+            this.y = randomPosition(yPositions);
             }
+        }
+    }
+
+    //make sure the gem doesn't fall on the same position as the obstacle
+    checkLifePosition(){
+        if(this.x == life.x && this.y == life.y){
+            //If gem lies on the same position as life, move gem
+            this.x = randomPosition(xPositions);
+            this.y = randomPosition(yPositions);
         }
     }
 };
@@ -208,7 +246,6 @@ const Obstacle = class{
     obstruct(){
 
         if((this.y == player.y) && (((player.x) < this.x + 80))&&(player.x + player.width > this.x)){
-            console.log(player.movingDirection);
             switch(player.movingDirection) {
             case 'up': 
                 player.y += 83;
@@ -226,6 +263,7 @@ const Obstacle = class{
             }
         }
     }
+
 }
 
 const Life = class{
@@ -240,26 +278,51 @@ const Life = class{
      }
      update(){
          this.collectLife();
+         this.checkObstacles();
      }
 
      collectLife(){
         if((this.y == player.y) && (((player.x) < this.x + 80))&&(player.x + player.width > this.x)){
-            //make gem disappear
+            //make Life disappear
             this.x = -1000;
             this.y = -1000;
 
-            //increase score by 20 points
-            player.score += 10;
+            //increase score by 30 points
+            //increase life by 1
+            player.score += 30;
+            player.life++;
+
+            //make life reappear in 5 seconds
+            //setTimeout(function() { reset(); }, 5000);
         }
     }
+
+    //make sure the life doesn't fall on the same position as the obstacle
+    checkObstacles(){
+        for(const obstacle of allObstacles){
+            if(this.x == obstacle.x && this.y == obstacle.y){
+            //If life lies in the same position as rock, move life
+            this.x = randomPosition(xPositions);
+            this.y = randomPosition(yPositions);
+            }
+        }
+    }
+
+    reset(){
+        this.x = randomPosition(xPositions);
+        this.y = randomPosition(yPositions);
+    }
+
  };
 
 //create gems
 const allGems = [];
 allGems[0] = new Gem;
+
 //create rocks
 const allObstacles = [];
 allObstacles[0] = new Obstacle;
+allObstacles[1] = new Obstacle;
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
