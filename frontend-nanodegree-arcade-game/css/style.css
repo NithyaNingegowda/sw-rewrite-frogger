@@ -1,67 +1,37 @@
-
 body {
-
     text-align: center;
-
     height: 600px;
-
 }
-
-
 
 .score {
-
     position: absolute;
-
     left: -240px;
-
     top: 60px;
-
-
-
 }
-
-
 
 .topScore {
-
     position: absolute;
-
     left: -20px;
-
     top: 60px;
-
 }
-
-
 
 .scores {
-
     position: relative;
-
     top: -620px;
-
     left: 50%;
-
 }
 
-
-
 .buttons {
-
     position: relative;
-
     width: 100px;
-
     margin: auto;
-
 }
 
 .sw-button {
     background-color: blue;
     color: #FFF;
     position: fixed;
-    bottom: 0;
-    right: 0;
-    padding: 5px 10px;
+    bottom: 25px;
+    right: 25px;
+    padding: 10px 20px;
 }
