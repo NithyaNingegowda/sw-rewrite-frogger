@@ -6,10 +6,11 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <script src="js/resources.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/engine.js"></script>
-    <script src="js/idb-script.js"></script>
+    <script type="text/javascript" src="js/resources.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/engine.js"></script>
+    <script type="text/javascript" src="js/idb.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
     <div class="scores">
 
             <h1 id="score" class="score"></h1>
@@ -38,10 +39,12 @@
             <span class="close">&times;</span>
             <h3>Game Over</h3>
             <p>Your score was: <span class="final-score"></span></p>
-            
+            <p>Enter your name to record your score: <input type="text" id="playername" value="Player 1"></span></p>
             <div align="center">
-            
               <button id="restartGame">Play again</button>
+              <button id="addPlayerScore" onclick="idbApp.addPlayerScore()">Add PlayerScore</button></br></br>
+              <div id="orders"></div>
+              <button id="clearAllPlayerScore" onclick="idbApp.clearAllPlayerScore()">Clear all Player Score</button></br></br>
             </div>
           </div>
 
