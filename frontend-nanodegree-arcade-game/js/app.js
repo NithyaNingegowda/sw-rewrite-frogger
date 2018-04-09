@@ -108,7 +108,7 @@ const Player = class {
             //implement a game over
             // Get the <span> element for final score
             let scores = document.getElementsByClassName("final-score");
-            for(let i = 0; i < scores.length ; i++){
+            for(let i = 0; i < scores.length; i++){
                 scores[i].innerHTML = player.score;
             }
 
@@ -121,10 +121,19 @@ const Player = class {
             this.life = 3;
 
             // Get the <span> element that closes the modal
-            var spanClose = document.getElementsByClassName("close")[0];
+            let spanClose = document.getElementsByClassName("close")[0];
 
             // When the user clicks on <span> (x), close the modal
             spanClose.onclick = () => {
+                modal.style.display = "none";
+                location.reload();
+            }
+            
+            // button to restart game
+            
+            let restartButton = document.getElementById('restartGame');
+          
+            restartButton.onclick = () => {
                 modal.style.display = "none";
                 location.reload();
             }
@@ -282,7 +291,7 @@ const Life = class {
      }
 
      incrementLife() {
-        if((this.y == player.y) && (((player.x) < this.x + 80)) && (player.x + player.width > this.x)){
+        if((this.y == player.y) && (((player.x) < this.x + 80)) && (player.x + player.width > this.x)) {
             //make Life disappear
             this.x = -1000;
             this.y = -1000;
