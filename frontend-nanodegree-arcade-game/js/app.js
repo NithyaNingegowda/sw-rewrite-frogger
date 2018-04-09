@@ -6,7 +6,7 @@ const Enemy = class {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
-    constructor(){
+    constructor() {
         // The image/sprite for our enemies, this uses
         // a helper we've provided to easily load images
         this.sprite = 'images/enemy-bug.png';
@@ -22,7 +22,7 @@ const Enemy = class {
         // which will ensure the game runs at the same speed for
         // all computers.
         this.x = this.x + this.speed * dt;
-        if(this.x > 600){
+        if(this.x > 600) {
             this.x = -101;
             this.y = randomPosition(yPositions);
             this.speed = randomSpeed();
@@ -40,7 +40,7 @@ const Enemy = class {
     //Check if they have collided on the x axis
     //player and enemy are 101 on width
     checkCollision() {
-        if((this.y == player.y) && (((player.x) < this.x + 80))&&(player.x + player.width > this.x)){
+        if((this.y == player.y) && (((player.x) < this.x + 80))&&(player.x + player.width > this.x)) {
         //bring player to original position
         player.decreaseLife();
         player.resetPlayer();
@@ -51,7 +51,7 @@ const Enemy = class {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-const Player = class{
+const Player = class {
     constructor() {
         this.sprite = 'images/char-boy.png';
         this.resetPlayer();
@@ -84,27 +84,27 @@ const Player = class{
     //update the player position and make sure it doesn't go
     //outside of the rendering box
     update() {
-        if(this.y < 1){
+        if(this.y < 1) {
             //the player made it
             this.resetPlayer();
             this.raiseScore();
             //this.resetEnvironment();
         }
         
-        if(this.y > 380){
+        if(this.y > 380) {
             this.y = 380;
         }
         
-        if(this.x < -2){
+        if(this.x < -2) {
             this.x = -2;
         }
         
-        if(this.x > 402){
+        if(this.x > 402) {
             this.x = 402;
         }
         //no more lives
         //game over
-        if(this.life === 0){
+        if(this.life === 0) {
             //implement a game over
             // Get the <span> element for final score
             var scores = document.getElementsByClassName("final-score");
@@ -160,26 +160,26 @@ const Player = class{
     }
 
     //decrease life
-    decreaseLife(){
+    decreaseLife() {
         this.life--;
     }
 
     //increase life
-    increaseLife(){
+    increaseLife() {
         this.life++;
     }
 };
 
 //Class Gem
-const Gem = class{
-    constructor(){
+const Gem = class {
+    constructor() {
         this.sprite = 'images/Gem-Blue.png';
         this.x = randomPosition(xPositions);
         this.y = randomPosition(yPositions);
         this.width = 101;
     }
 
-    update(){
+    update() {
         this.collectGem();
         this.checkObstacles();
         this.checkLifePosition();
@@ -191,8 +191,8 @@ const Gem = class{
     }
 
     //allow the player to collect the gem
-    collectGem(){
-        if((this.y == player.y) && (((player.x) < this.x + 80))&&(player.x + player.width > this.x)){
+    collectGem() {
+        if((this.y == player.y) && (((player.x) < this.x + 80))&&(player.x + player.width > this.x)) {
             //make gem disappear
             this.x = -1000;
             this.y = -1000;
@@ -203,9 +203,9 @@ const Gem = class{
     }
 
     //make sure the gem doesn't fall on the same position as the obstacle
-    checkObstacles(){
-        for(const obstacle of allObstacles){
-            if(this.x == obstacle.x && this.y == obstacle.y){
+    checkObstacles() {
+        for(const obstacle of allObstacles) {
+            if(this.x == obstacle.x && this.y == obstacle.y) {
             //If gem lies in the same position as rock, move gem
             this.x = randomPosition(xPositions);
             this.y = randomPosition(yPositions);
@@ -214,8 +214,8 @@ const Gem = class{
     }
 
     //make sure the gem doesn't fall on the same position as the obstacle
-    checkLifePosition(){
-        if(this.x == life.x && this.y == life.y){
+    checkLifePosition() {
+        if(this.x == life.x && this.y == life.y) {
             //If gem lies on the same position as life, move gem
             this.x = randomPosition(xPositions);
             this.y = randomPosition(yPositions);
@@ -225,15 +225,15 @@ const Gem = class{
 
 
 //Class Obstacle
-const Obstacle = class{
-    constructor(){
+const Obstacle = class {
+    constructor() {
         this.sprite = 'images/Rock.png';
         this.x = randomPosition(xPositions);
         this.y = randomPosition(yPositions);
         this.width = 101;
     }
 
-    update(){
+    update() {
         this.obstruct();
     }
 
@@ -243,9 +243,9 @@ const Obstacle = class{
     }
 
     //don't let the user pass over the rock
-    obstruct(){
+    obstruct() {
 
-        if((this.y == player.y) && (((player.x) < this.x + 80))&&(player.x + player.width > this.x)){
+        if((this.y == player.y) && (((player.x) < this.x + 80))&&(player.x + player.width > this.x)) {
             switch(player.movingDirection) {
             case 'up': 
                 player.y += 83;
@@ -266,22 +266,22 @@ const Obstacle = class{
 
 }
 
-const Life = class{
+const Life = class {
      constructor() {
         this.sprite = 'images/Heart.png';
         this.x = randomPosition(xPositions);
         this.y = randomPosition(yPositions);
         
      }
-     render (){
+     render () {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
      }
-     update(){
+     update() {
          this.collectLife();
          this.checkObstacles();
      }
 
-     collectLife(){
+     collectLife() {
         if((this.y == player.y) && (((player.x) < this.x + 80))&&(player.x + player.width > this.x)){
             //make Life disappear
             this.x = -1000;
@@ -293,14 +293,14 @@ const Life = class{
             player.life++;
 
             //make life reappear in 5 seconds
-            //setTimeout(function() { reset(); }, 5000);
+            //setTimeout(function() { this.reset(); }, 5000);
         }
     }
 
     //make sure the life doesn't fall on the same position as the obstacle
-    checkObstacles(){
-        for(const obstacle of allObstacles){
-            if(this.x == obstacle.x && this.y == obstacle.y){
+    checkObstacles() {
+        for(const obstacle of allObstacles) {
+            if(this.x == obstacle.x && this.y == obstacle.y) {
             //If life lies in the same position as rock, move life
             this.x = randomPosition(xPositions);
             this.y = randomPosition(yPositions);
@@ -308,7 +308,7 @@ const Life = class{
         }
     }
 
-    reset(){
+    reset() {
         this.x = randomPosition(xPositions);
         this.y = randomPosition(yPositions);
     }
@@ -329,7 +329,7 @@ allObstacles[1] = new Obstacle;
 const allEnemies = []; 
 const numEnemies = 3;
 
-for(let i = 0; i < numEnemies; i++){
+for(let i = 0; i < numEnemies; i++) {
     allEnemies[i] = new Enemy;
     allEnemies[i].speed = randomSpeed(); 
     allEnemies[i].y = randomPosition(yPositions);
@@ -368,13 +368,13 @@ function getRandom(arr, n) {
 
 
 //get a random speed
-function randomSpeed(){
+function randomSpeed() {
     const speed = Math.floor(Math.random() * (400 - 100) + 100); 
     return speed;
 }
 
 //get a random y position for enemy
-function randomPosition(arr = []){
+function randomPosition(arr = []) {
     positions = arr;
     const position = getRandom(positions, 1);
     return position[0];
