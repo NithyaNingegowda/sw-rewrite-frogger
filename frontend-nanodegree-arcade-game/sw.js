@@ -1,4 +1,4 @@
-var staticCacheName = 'frogger-static-v3';
+var staticCacheName = 'frogger-static-v4';
 
 self.addEventListener('install', event => {
   event.waitUntil(
@@ -34,7 +34,7 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request).then(function(response) {
-      return response || fetch(event.request);
+      return response || fetchNetworkRequest(event.request);
     })
   );
 });
@@ -43,3 +43,11 @@ self.addEventListener('message', function(event) {
   if(event.data.activate == 'true');
     self.skipWaiting();
 });
+
+function fetchNetworkRequest(request) {
+  if(request.cache === 'only-if-cached') {
+    return fetch(request, { mode: "same-origin" });
+  } else {
+    return fetch(request);
+  }
+}
