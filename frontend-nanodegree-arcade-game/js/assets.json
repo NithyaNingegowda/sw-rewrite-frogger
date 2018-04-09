@@ -9,6 +9,10 @@
         "images/stone-block.png",
         "images/grass-block.png",
         "images/enemy-bug.png",
-        "images/char-boy.png"        
+        "images/char-boy.png",
+        "images/Gem-Blue.png",
+        "images/Rock.png",
+        "images/gameover.png",
+        "images/Heart.png"       
     ]
 }
