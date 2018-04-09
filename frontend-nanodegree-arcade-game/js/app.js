@@ -40,7 +40,7 @@ const Enemy = class {
     //Check if they have collided on the x axis
     //player and enemy are 101 on width
     checkCollision() {
-        if((this.y == player.y) && (((player.x) < this.x + 80))&&(player.x + player.width > this.x)) {
+        if((this.y == player.y) && (((player.x) < this.x + 80)) && (player.x + player.width > this.x)) {
         //bring player to original position
         player.decreaseLife();
         player.resetPlayer();
@@ -107,13 +107,13 @@ const Player = class {
         if(this.life === 0) {
             //implement a game over
             // Get the <span> element for final score
-            var scores = document.getElementsByClassName("final-score");
-            for(let i = 0; i < scores.length ;i++){
+            let scores = document.getElementsByClassName("final-score");
+            for(let i = 0; i < scores.length ; i++){
                 scores[i].innerHTML = player.score;
             }
 
             // Get the modal
-            var modal = document.getElementById('myModal');
+            let modal = document.getElementById('myModal');
             // Display modal
             modal.style.display = "block";
 
@@ -124,13 +124,13 @@ const Player = class {
             var spanClose = document.getElementsByClassName("close")[0];
 
             // When the user clicks on <span> (x), close the modal
-            spanClose.onclick = function() {
+            spanClose.onclick = () => {
                 modal.style.display = "none";
                 location.reload();
             }
 
             // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
+            window.onclick = event => {
                 if (event.target == modal) {
                     modal.style.display = "none";
                     location.reload();
@@ -192,7 +192,7 @@ const Gem = class {
 
     //allow the player to collect the gem
     collectGem() {
-        if((this.y == player.y) && (((player.x) < this.x + 80))&&(player.x + player.width > this.x)) {
+        if((this.y == player.y) && (((player.x) < this.x + 80)) && (player.x + player.width > this.x)) {
             //make gem disappear
             this.x = -1000;
             this.y = -1000;
@@ -245,7 +245,7 @@ const Obstacle = class {
     //don't let the user pass over the rock
     obstruct() {
 
-        if((this.y == player.y) && (((player.x) < this.x + 80))&&(player.x + player.width > this.x)) {
+        if((this.y == player.y) && (((player.x) < this.x + 80)) && (player.x + player.width > this.x)) {
             switch(player.movingDirection) {
             case 'up': 
                 player.y += 83;
@@ -277,12 +277,12 @@ const Life = class {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
      }
      update() {
-         this.collectLife();
+         this.incrementLife();
          this.checkObstacles();
      }
 
-     collectLife() {
-        if((this.y == player.y) && (((player.x) < this.x + 80))&&(player.x + player.width > this.x)){
+     incrementLife() {
+        if((this.y == player.y) && (((player.x) < this.x + 80)) && (player.x + player.width > this.x)){
             //make Life disappear
             this.x = -1000;
             this.y = -1000;
@@ -290,7 +290,7 @@ const Life = class {
             //increase score by 30 points
             //increase life by 1
             player.score += 30;
-            player.life++;
+            player.increaseLife();
 
             //make life reappear in 5 seconds
             //setTimeout(function() { this.reset(); }, 5000);
