@@ -17,16 +17,16 @@
     <script type="text/javascript" src="js/main.js"></script>
     <div class="scores">
 
-            <h1 id="score" class="score"></h1>
+        <h1 id="score" class="score"></h1>
 
-            <h1 id="topScore" class="topScore"></h1>
+        <h1 id="topScore" class="topScore"></h1>
 
-            <h4 class="about"> <a class="trigger_popup_fricc">About the game</a>
+        <h4 class="about"> <a class="trigger_popup_fricc">About the game</a>
 
-                <div class="hover_bkgr_fricc">
-                    <span class="helper"></span>
-                    <div>
-                        <div class="popupCloseButton">X</div>
+            <div class="hover_bkgr_fricc">
+                <span class="helper"></span>
+                <div>
+                    <div class="popupCloseButton">X</div>
                         
                         
                         <h1> About the game !</h1>
@@ -89,5 +89,18 @@ Created by: Francisco, Adnan, Nithya, Sam, Ariel, Rick
           </div>
 
         </div>
+        <script>
+        $(window).load(function () {
+    $(".trigger_popup_fricc").click(function(){
+       $('.hover_bkgr_fricc').show();
+    });
+    $('.hover_bkgr_fricc').click(function(){
+        $('.hover_bkgr_fricc').hide();
+    });
+    $('.popupCloseButton').click(function(){
+        $('.hover_bkgr_fricc').hide();
+    });
+});
+</script>
 </body>
 </html>

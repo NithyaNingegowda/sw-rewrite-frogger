@@ -21,6 +21,12 @@ body {
     left: 50%;
 }
 
+.about {
+    position: absolute;
+    left: -30%;
+    top: 60px; 
+}
+
 .buttons {
     position: relative;
     width: 100px;
@@ -64,7 +70,6 @@ body {
     background-repeat: no-repeat;
 
 }
-
 /* Popup box BEGIN */
 .hover_bkgr_fricc{
     background:rgba(0,0,0,.4);
