@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>Effective JavaScript: Frogger</title>
     <link rel="stylesheet" href="css/style.css">
+    <script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
 </head>
 <body>
     <script type="text/javascript" src="js/resources.js"></script>
@@ -11,25 +15,54 @@
     <script type="text/javascript" src="js/engine.js"></script>
     <script type="text/javascript" src="js/idb.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/popup.js"></script>
+
     <div class="scores">
 
-            <h1 id="score" class="score"></h1>
+        <h1 id="score" class="score"></h1>
 
-            <h1 id="topScore" class="topScore"></h1>
+        <h1 id="topScore" class="topScore"></h1>
 
+        <h4 class="about"> <a class="trigger_popup_fricc">About the game</a>
+
+            <div class="hover_bkgr_fricc">
+                <span class="helper"></span>
+                <div>
+                    <div class="popupCloseButton">X</div>
+                        
+                        
+                        <h1> About the game !</h1>
+                        <br>
+<p> This is the final project for the Object-Oriented JavaScript Udacity course. You can find other demonstrations on the Demo site.
+</p>
+<h1>How to Play</h1>
+<p>Choose your character with the Left and Right arrow keys. Press the Up or Down arrow key to select the character. The game is reminiscent of Frogger in that the directional arrows will move you around the map.
+</p> 
+<ul>
+    <li>To Make to the Final : 100 points</li>
+    <li>To collect Heart : 30 points plus Extra life</li>
+    <li>To collect Gem : 20 points </li>
+</ul>
+
+<h2>Credits</h2>
+<h4>Created by: Francisco, Adnan, Nithya, Sam, Rick</h4>
+
+
+                    </div>
+                </div> 
+            </h4>
         </div>
 
-        <div class="buttons">
-
-            <button class="btn btn-default btn-lg" id="up" onclick="player.handleInput('up')" >Up</button>
-
-            <button class="btn btn-default btn-lg" id="left" onclick="player.handleInput('left')" >Left</button>
-
-            <button class="btn btn-default btn-lg" id="right" onclick="player.handleInput('right')" >Right</button>
-
-            <button class="btn btn-default btn-lg" id="down" onclick="player.handleInput('down')" >Down</button>
-
+        <div class="container">
+            <button class="btn btn-default btn-lg" id="up"  onclick="player.handleInput('up')" > </button>
         </div>
+        <div class="container" >   
+            <button class="btn btn-default btn-lg" id="left" onclick="player.handleInput('left')"> </button>
+            <button class="btn btn-default btn-lg" id="right" onclick="player.handleInput('right')" > </button>
+        </div>    
+        <div class="container" >
+            <button class="btn btn-default btn-lg" id="down" onclick="player.handleInput('down')" > </button>
+        </div>       
 
         <!-- The Modal -->
         <div id="myModal" class="modal">
