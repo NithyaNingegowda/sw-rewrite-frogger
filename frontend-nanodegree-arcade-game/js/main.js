@@ -26,60 +26,62 @@ var idbApp = (function() {
     // the fall-through behaviour is what we want.
     switch (upgradeDB.oldVersion) {
       case 0:
-        upgradeDB.createObjectStore('keyval');
+        upgradeDB.createObjectStore('scoreData', {keyPath: 'id', autoIncrement:true});
       case 1:
-        upgradeDB.createObjectStore('objs', {keyPath: 'id', autoIncrement:true});
-      case 2:
-        console.log('Creating a name index');
-        var store = upgradeDB.transaction.objectStore('objs');
+        var store = upgradeDB.transaction.objectStore('scoreData');
         store.createIndex('name', 'name');
-      case 3:
-        console.log('Creating a score index');
-        var store = upgradeDB.transaction.objectStore('objs');
+      case 2:
+        var store = upgradeDB.transaction.objectStore('scoreData');
         store.createIndex('score', 'score');
     }
   });
 
   function addPlayerScore() {
     dbPromise.then(function(db) {
-      var tx = db.transaction('objs', 'readwrite');
-      var store = tx.objectStore('objs');
-      var items = [
-        {
-          name: document.getElementById('playername').value,
-          score: document.getElementsByClassName('final-score')[0].innerHTML
-        }
-      ];
-      return Promise.all(items.map(function(item) {
-          console.log('Adding item: ', item);
-          return store.put(item);
-        })
-      ).catch(function(e) {
-        tx.abort();
-        console.log(e);
-      }).then(function() {
-        document.getElementById('addPlayerScore').style.display = "none";
-        document.getElementById('playername').disabled = true;
-        console.log('All items added successfully!');
-        showPlayerScore();
-      });
+      var tx = db.transaction('scoreData', 'readwrite');
+      var store = tx.objectStore('scoreData');
+
+      // check if playername value is empty
+      let playerNameValue = document.getElementById('playername').value;
+      // alert user if name is empty
+      if(playerNameValue === '') {
+        alert("Please enter a name");
+        return;
+      } else {
+        var items = [
+          {
+            name: playerNameValue,
+            score: document.getElementsByClassName('final-score')[0].innerHTML
+          }
+        ];
+        return Promise.all(items.map(function(item) {
+            return store.put(item);
+          })
+        ).catch(function(e) {
+          tx.abort();
+          console.log(e);
+        }).then(function() {
+          document.getElementById('addPlayerScore').style.display = "none";
+          document.getElementById('playername').disabled = true;
+          showPlayerScore();
+        });
+      }
     });
   }
 
   function showPlayerScore() {
     var s = '';
     dbPromise.then(function(db) {
-      var tx = db.transaction('objs', 'readonly');
-      var store = tx.objectStore('objs');
+      var tx = db.transaction('scoreData', 'readonly');
+      var store = tx.objectStore('scoreData');
       return store.openCursor();
     }).then(function showRange(cursor) {
       if (!cursor) {return;}
-      console.log('Cursored at:', cursor.value.name);
 
       s += '<h2>' + cursor.value.name + '</h2><p>';
       for (var field in cursor.value) {
         if (field === 'score') {
-          s += field + '=' + cursor.value[field] + '<br/>';
+          s += field + ': ' + cursor.value[field] + '<br/>';
         }
       }
       s += '</p>';
@@ -93,12 +95,11 @@ var idbApp = (function() {
 
   function clearAllPlayerScore() {
     dbPromise.then(function(db) {
-      var tx = db.transaction('objs', 'readwrite');
-      var store = tx.objectStore('objs');
+      var tx = db.transaction('scoreData', 'readwrite');
+      var store = tx.objectStore('scoreData');
       return store;
     }).then(function(store) {
       var objectStoreRequest = store.clear();
-      console.log('IndexedDB cleared');
       document.getElementById('clearAllPlayerScore').style.display = "none";
       document.getElementById('orders').style.display = "none";
     }).catch(function(e){
