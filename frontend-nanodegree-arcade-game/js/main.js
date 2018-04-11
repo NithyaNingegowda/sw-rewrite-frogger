@@ -78,7 +78,7 @@ var idbApp = (function() {
     }).then(function showRange(cursor) {
       if (!cursor) {return;}
 
-      s += '<h2>' + cursor.value.name + '</h2><p>';
+      s += '<h4>' + cursor.value.name + '</h4><p>';
       for (var field in cursor.value) {
         if (field === 'score') {
           s += field + ': ' + cursor.value[field] + '<br/>';
