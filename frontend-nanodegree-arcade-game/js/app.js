@@ -296,9 +296,9 @@ const Life = class {
             this.x = -1000;
             this.y = -1000;
 
-            //increase score by 30 points
+            //remove -increase score by 30 points
             //increase life by 1
-            player.score += 30;
+          //  player.score += 30;
             player.increaseLife();
 
             //make life reappear in 5 seconds
