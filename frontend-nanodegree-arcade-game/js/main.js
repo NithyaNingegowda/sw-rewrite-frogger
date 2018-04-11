@@ -43,8 +43,8 @@ var idbApp = (function() {
 
       // check if playername value is empty
       let playerNameValue = document.getElementById('playername').value;
-      // alert user if name is empty
       if(playerNameValue === '') {
+        // alert user if name is empty
         alert("Please enter a name");
         return;
       } else {
@@ -54,17 +54,24 @@ var idbApp = (function() {
             score: document.getElementsByClassName('final-score')[0].innerHTML
           }
         ];
-        return Promise.all(items.map(function(item) {
-            return store.put(item);
-          })
-        ).catch(function(e) {
+          items.forEach(function(item) {
+            store.put(item);
+          });
+          store.index('score').openCursor(null, 'prev')
+        .catch(function(e) {
           tx.abort();
           console.log(e);
+        }).then(function(cursor) {
+          return cursor.advance(5);
+        }).then(function deleteRest(cursor) {
+          if(!cursor) return;
+          cursor.delete();
+          return cursor.continue().then(deleteRest);
         }).then(function() {
           document.getElementById('addPlayerScore').style.display = "none";
           document.getElementById('playername').disabled = true;
-          showPlayerScore();
-        });
+          showPlayerScore();          
+        })
       }
     });
   }
