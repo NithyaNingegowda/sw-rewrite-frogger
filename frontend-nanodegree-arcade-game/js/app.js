@@ -299,7 +299,7 @@ const Life = class {
             player.increaseLife();
 
             //make life reappear in 5 seconds
-            setTimeout(() => { this.reset(); }, 30000);
+            //setTimeout(() => { this.reset(); }, 30000);
         }
     }
 
