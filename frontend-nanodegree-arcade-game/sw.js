@@ -1,5 +1,5 @@
 var staticCacheName = 'frogger-static-v4';
-
+//
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(staticCacheName).then(cache => {
