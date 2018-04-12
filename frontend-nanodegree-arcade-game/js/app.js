@@ -117,9 +117,6 @@ const Player = class {
             // Display modal
             modal.style.display = "block";
 
-            this.score = 0;
-            this.life = 3;
-
             // Get the <span> element that closes the modal
             let spanClose = document.getElementsByClassName("close")[0];
 
