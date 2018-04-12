@@ -19,7 +19,7 @@
   </head>
   <body>
         
-        <script type="text/javascript" src="js/resources.js"></script>
+    <script type="text/javascript" src="js/resources.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/engine.js"></script>
     <script type="text/javascript" src="js/idb.js"></script>
@@ -27,34 +27,35 @@
     <script type="text/javascript" src="js/popup.js"></script>
 
     <div class="container ">
-            <h4 class="about"> <a class="trigger_popup_fricc">About the game</a>
+        <div class="about"> 
+            <a class="trigger_popup_fricc">About the game</a>
     
-                <div class="hover_bkgr_fricc">
-                    <span class="helper"></span>
-                <div>
-                    <div class="popupCloseButton">X</div>
-                        <h3> About the game !</h3>
-                            <br>
-    <p> This is the final project for the Object-Oriented JavaScript Udacity course. You can find other demonstrations on the Demo site.
-    </p>
-    <h1>How to Play</h1>
-    <p>Choose your character with the Left and Right arrow keys. Press the Up or Down arrow key to select the character. The game is reminiscent of Frogger in that the directional arrows will move you around the map.
-    </p> 
-    <ul>
-        <li>To Make to the Final : 100 points</li>
-        <li>To collect Heart : 30 points plus Extra life</li>
-        <li>To collect Gem : 20 points </li>
-    </ul>
-    
-    <h3>Credits</h3>
-    <h4>Created by: Francisco, Adnan, Nithya, Sam, Rick</h4>
-                </div>
-                    </div> 
-                </h4>
+          <div class="hover_bkgr_fricc">
+            <span class="helper"></span>
+            <div id="content">
+                <div class="popupCloseButton">X</div>
+                <h4> About the game !</h4>
+                <br>
+                <p> This is the final project for the Object-Oriented JavaScript Udacity course. You can find other demonstrations on the Demo site.
+                </p>
+                <h4>How to Play</h4>
+                <p>Choose your character with the Left and Right arrow keys. Press the Up or Down arrow key to select the character. The game is reminiscent of Frogger in that the directional arrows will move you around the map.
+                </p> 
+                <ul>
+                    <li>To Make to the Final : 100 points</li>
+                    <li>To collect Heart : 30 points plus Extra life</li>
+                    <li>To collect Gem : 20 points </li>
+                </ul>
+                
+                <h4>Credits</h4>
+                <h6>Created by: Francisco, Adnan, Nithya, Sam, Rick</h6>
+            </div>
+          </div> 
+        </div>
     </div>
     
 
-    <div class='container'>
+    <div class='container' >
             <div >
                     <button class="btn btn-default btn-lg" id="up"  onclick="player.handleInput('up')" > </button>
             </div>
@@ -65,10 +66,7 @@
             <div >
                 <button class="btn btn-default btn-lg" id="down" onclick="player.handleInput('down')" > </button>
             </div>  
-        </div>
-             
-                 
-    
+    </div>    
             <!-- The Modal -->
             <div id="myModal" class="modal">
     
@@ -87,7 +85,7 @@
               </div>
             </div>
 
-    </div>        
+           
    
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
