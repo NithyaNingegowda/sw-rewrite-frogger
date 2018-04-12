@@ -40,9 +40,9 @@ var idbApp = (function() {
     dbPromise.then(function(db) {
       var tx = db.transaction('scoreData', 'readwrite');
       var store = tx.objectStore('scoreData');
-
+      
       // parse score into number from a string
-      let playerScore = parseInt(document.getElementsByClassName('final-score')[0].innerHTML);
+      let playerScore = player.score;
       // check if playername value is empty
       let playerNameValue = document.getElementById('playername').value;
       if(playerNameValue === '') {

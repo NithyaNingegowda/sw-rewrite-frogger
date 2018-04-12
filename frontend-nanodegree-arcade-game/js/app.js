@@ -117,9 +117,6 @@ const Player = class {
             // Display modal
             modal.style.display = "block";
 
-            this.score = 0;
-            this.life = 3;
-
             // Get the <span> element that closes the modal
             let spanClose = document.getElementsByClassName("close")[0];
 
@@ -302,7 +299,7 @@ const Life = class {
             player.increaseLife();
 
             //make life reappear in 5 seconds
-            //setTimeout(function() { this.reset(); }, 5000);
+            //setTimeout(() => { this.reset(); }, 30000);
         }
     }
 
@@ -318,6 +315,7 @@ const Life = class {
     }
 
     reset() {
+        console.log('reappear heart');
         this.x = randomPosition(xPositions);
         this.y = randomPosition(yPositions);
     }
